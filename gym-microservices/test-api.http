@@ -1,0 +1,130 @@
+### Variables
+@baseUrl = http://localhost:8080/api/v1/products
+@productId =
+
+###
+### 1. LISTAR PRODUCTOS (GET)
+GET {{baseUrl}}?page=0&size=10&sort=name,asc
+
+###
+### 2. CREAR PRODUCTO 1 - WHEY PROTEIN
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "name": "Whey Protein Gold",
+  "brand": "Gold Standard",
+  "category": "Supplements",
+  "price": 49.99,
+  "stockQuantity": 100
+}
+
+###
+### 3. CREAR PRODUCTO 2 - DUMBBELL SET
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "name": "Dumbbell Set",
+  "brand": "CAP",
+  "category": "Equipment",
+  "price": 89.99,
+  "stockQuantity": 50
+}
+
+###
+### 4. CREAR PRODUCTO 3 - YOGA MAT
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "name": "Yoga Mat",
+  "brand": "Lululemon",
+  "category": "Apparel",
+  "price": 88.00,
+  "stockQuantity": 75
+}
+
+###
+### 5. LISTAR PRODUCTOS (después de crear)
+GET {{baseUrl}}?page=0&size=10
+
+###
+### 6. OBTENER PRODUCTO POR ID
+### Cambia el UUID por el de tu producto creado
+GET {{baseUrl}}/550e8400-e29b-41d4-a716-446655440000
+
+###
+### 7. ACTUALIZAR PRODUCTO COMPLETO (PUT)
+### Cambiar el UUID por uno real
+PUT {{baseUrl}}/550e8400-e29b-41d4-a716-446655440000
+Content-Type: application/json
+
+{
+  "name": "Whey Protein Premium",
+  "brand": "Gold Standard Ultra",
+  "category": "Supplements",
+  "price": 59.99,
+  "stockQuantity": 150
+}
+
+###
+### 8. ACTUALIZAR PARCIALMENTE (PATCH) - Solo Precio
+PATCH {{baseUrl}}/550e8400-e29b-41d4-a716-446655440000
+Content-Type: application/json
+
+{
+  "price": 45.99
+}
+
+###
+### 9. ACTUALIZAR PARCIALMENTE (PATCH) - Solo Stock
+PATCH {{baseUrl}}/550e8400-e29b-41d4-a716-446655440000
+Content-Type: application/json
+
+{
+  "stockQuantity": 200
+}
+
+###
+### 10. ELIMINAR PRODUCTO
+DELETE {{baseUrl}}/550e8400-e29b-41d4-a716-446655440000
+
+###
+### 11. INTENTAR OBTENER PRODUCTO ELIMINADO (Error 404)
+GET {{baseUrl}}/550e8400-e29b-41d4-a716-446655440000
+
+###
+### 12. ERROR DE VALIDACIÓN - Nombre vacío
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "name": "",
+  "brand": "Test",
+  "category": "Supplements",
+  "price": 10.00,
+  "stockQuantity": 50
+}
+
+###
+### 13. ERROR DE VALIDACIÓN - Sin precio
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "name": "Test Product",
+  "brand": "Test",
+  "category": "Supplements",
+  "price": null,
+  "stockQuantity": 50
+}
+
+###
+### 14. LISTAR CON PAGINACIÓN - Página 1
+GET {{baseUrl}}?page=1&size=5
+
+###
+### 15. LISTAR ORDENADO POR PRECIO DESCENDENTE
+GET {{baseUrl}}?page=0&size=10&sort=price,desc
+
